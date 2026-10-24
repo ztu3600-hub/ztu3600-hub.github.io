@@ -50,7 +50,7 @@
     '交付记录：2026.10.20。原资料记载 pine pollen tincture、lambs ear vs mullein、mullein vs lambs ear、kelp and seaweed 曾位于美国 Google 第1名；属于历史记录，网站前端与技术 SEO 已交付，不构成当前排名承诺。']
   };
   const patchProject=()=>{
-    if(location.pathname!=='/project')return;
+    if((location.pathname.replace(/\/$/,'')||'/')!=='/project')return;
     const key=new URLSearchParams(location.search).get('case')||'meisda';const data=projects[key]||projectBase;
     const all=Object.values(projects);const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
     let node;
@@ -119,7 +119,7 @@
       if(n.parentElement.closest('script,style'))continue;
       if(n.nodeValue.includes('Copyright ©2021 INKD'))n.nodeValue=n.nodeValue.replace('Copyright ©2021 INKD','© 2026 尚品优品科技有限公司');
       if(n.nodeValue==='Get started…')n.nodeValue='聊聊你的项目';
-      if(n.nodeValue==='全部指南'&&document.querySelector('input')===null&&location.pathname==='/')n.nodeValue='重新填写';
+      if(n.nodeValue==='全部指南'&&document.querySelector('input')===null&&(location.pathname.replace(/\/$/,'')||'/')==='/')n.nodeValue='重新填写';
     }
     patchProject();
     window.spEnhance?.();
